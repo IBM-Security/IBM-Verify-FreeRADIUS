@@ -1,0 +1,3 @@
+[submodule "src/rlm_verify/sdk"]
+	path = src/rlm_verify/sdk
+	url = git@github.ibm.com:ibm-security/ibm-verify-sdk-c.git

@@ -1,0 +1,17 @@
+version: "2"
+services:
+  isam-freeradius:
+    container_name: isam-freeradius
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: "jared/isam-freeradius"
+    ports:
+      - "0.0.0.0:1812:1812"
+      - "0.0.0.0:1812:1812/udp"
+    entrypoint:
+     - bash
+    labels:
+     - "ISAM FreeRADIUS"
+    tty: true
+    stdin_open: true

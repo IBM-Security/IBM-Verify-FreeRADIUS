@@ -1,0 +1,11 @@
+TARGET		= rlm_verify
+SRCS		= rlm_verify.c sdk/isam.c sdk/cJSON.c
+HEADERS		= config.h sdk/isam.h sdk/cJSON.h
+RLM_CFLAGS	=
+RLM_LIBS	= 
+
+include ../rules.mak
+
+$(STATIC_OBJS): $(HEADERS)
+
+$(DYNAMIC_OBJS): $(HEADERS)
