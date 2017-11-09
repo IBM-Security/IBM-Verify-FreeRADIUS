@@ -26,18 +26,18 @@ The easiest way to test the environment is to use the provided test client scrip
 ## Configuration
 Property Name | Type | Description | Default
 ------------ | ------------- | ------------- | -------------
-mode | String | The mode of operation of the Verify FreeRadius module | "simple"
-protocol | String | The protocol through which the module will communicate with ISAM | "https"
+mode | String | The mode of operation of the Verify FreeRadius module | simple
+protocol | String | The protocol through which the module will communicate with ISAM | https
 server | String | The hostname of the ISAM. | ""
 port | Integer | The port that the module will used for communication. | 443
-junction | String | The junction through which the AAC policy is contained. This will be appended after the `hostname:port` | "/mga"
+junction | String | The junction through which the AAC policy is contained. This will be appended after the `hostname:port` | /mga
 resource |String | The PolicyID of the ISAM Radius Authentication Policy | ""
 apikey | String | The API key used to authenticate the Radius Client to ISAM. | ""
 client | IP Address | The clients IP address. | 0.0.0.0
 simple-format | String | For simple mode, the format of the OTP entry. | ""
 otp-length | Integer | The length of the OTP | 6
 otp-retry | Integer | The number of times a OTP can be tried | 5
-reply-message | String | The string to return on a `Access-Challenge` or `Access-Reject` response. If on the Policy JSON response, a JSON property called `reply_message` is defined, then this will be used instead of this configuration parameter. | "This is an ISAM OTP challenge. Please enter your OTP."
+reply-message | String | The string to return on a `Access-Challenge` or `Access-Reject` response. If on the Policy JSON response, a JSON property called `reply_message` is defined, then this will be used instead of this configuration parameter. | This is an ISAM OTP challenge. Please enter your OTP.
 user-suffix | String | The suffix that will be appeneded to the username on each usage.  | ""
 enabled | String/Boolean | If the module is enabled. | false
 debug | String/Boolean | Enable debug trace. This will help in initial configuration. | false
@@ -129,8 +129,8 @@ In the `Vagrantfile`, if you look at the two scripts `ubuntu_script` and `centos
 
 To install required `YUM` packages:
 ```
-sudo yum update -y
-sudo yum install gcc wget openssl-devel.x86_64 git libtalloc-devel libcurl-devel -y
+yum update -y
+yum install gcc openssl-devel.x86_64 git libtalloc-devel libcurl-devel -y
 ```
 
 2. Download FreeRadius release source code
@@ -184,7 +184,7 @@ Once you have a valid Vagrant environment, the following commands can be useful:
 `/usr/local/etc/raddb/sites-available/default`
 
 ## Docker setup
-The docker setup is very similar to the [Existing installation setup](#existing-installation-setup) section. The [Dockerfile](Dockerfile) simply copies the binary file produced from the section [Building from Source](#building-from-source) and the two configuration files; [radiusd.conf](configuration/radiusd.conf) and [clients.conf](configuration/clients.conf).
+The docker setup is very similar to the [Existing installation setup](#existing-installation-setup) section. The [Dockerfile](Dockerfile) simply copies the binary file produced from the section [Building from Source](#building-from-source) and the two configuration files; [radiusd.conf](configuration/radiusd.conf) and [clients.conf](configuration/clients.conf). Notice the version of FreeRadius obtained from the Docker build is from the RedHat repositories - you may need to change this if you want a different version. 
 
 ## Existing installation setup
 This section is for those who have an existing FreeRADIUS installation and want to use the Verify FreeRadius module. 
@@ -223,6 +223,13 @@ authenticate {
 }
 ```
 6. Start your FreeRADIUS server. 
+
+## FreeRADIUS High Availability
+Just like any other module in FreeRadius - you can configure the IBM Verify module to run in a highly available manner. 
+Follow the [FreeRadius guide](https://wiki.freeradius.org/config/Fail-over) on how to do this.
+
+## FreeRADIUS Logging 
+The standard tools for logging can be used for each module. Follow the [FreeRadius guide](https://wiki.freeradius.org/config/Logging) on how to do this.
 
 ## Compatible Radius Clients
 
