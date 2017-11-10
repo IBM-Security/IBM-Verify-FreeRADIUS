@@ -23,6 +23,10 @@ If you want to use the module for an existing installation of FreeRadius - skip 
 ### Verification testing
 The easiest way to test the environment is to use the provided test client script. Run through the [Shell Test Client](#shell-test-client) section and verify that the setup in the mode you have selected works.
 
+## Architecture
+The module is designed to be used in an environment similar to the following:
+<img src="docs/module-architecture.png" align="right" width="250px" />
+
 ## Configuration
 Property Name | Type | Description | Default
 ------------ | ------------- | ------------- | -------------
