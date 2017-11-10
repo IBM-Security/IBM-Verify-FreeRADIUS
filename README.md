@@ -25,7 +25,7 @@ The easiest way to test the environment is to use the provided test client scrip
 
 ## Architecture
 The module is designed to be used in an environment similar to the following:
-![module-architecture][docs/module-architecture.png]
+![module-architecture](docs/module-architecture.png)
 
 ## Configuration
 Property Name | Type | Description | Default
