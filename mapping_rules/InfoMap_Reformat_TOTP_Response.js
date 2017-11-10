@@ -8,10 +8,14 @@ importClass(Packages.com.tivoli.am.fim.trustserver.sts.utilities.IDMappingExtUti
  * makes the assumption that the TOTP for the username passed as a request
  * parameter has been validated.
  */
-var username = context.get(Scope.REQUEST,
-		"urn:ibm:security:asf:request:parameter", "username");
+IDMappingExtUtils.traceString("Inside reformat TOTP response");
+var username = context.get(Scope.SESSION,
+		"urn:ibm:security:asf:response:token:attributes", "username");
 success.setValue(false); // this is fine - the backchannel is not trying to
 							// establish an authenticated session
-page.setValue("/authsvc/authenticator/apimfa/backchannelcomplete.html");
+IDMappingExtUtils.traceString("Username from reformat TOTP response : " +username);
+page.setValue("/authsvc/authenticator/radiustotp/backchannelcomplete.html");
+if (username != null){
 macros.put("@USERNAME@", username);
 macros.put("@AUTHNMECHTYPES@", "[\"urn:ibm:security:authentication:asf:mechanism:totp\"]");
+}
