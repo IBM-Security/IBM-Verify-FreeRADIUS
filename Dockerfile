@@ -3,7 +3,7 @@ FROM centos:7
 MAINTAINER Jared Page jaredpa@au1.ibm.com
 
 RUN echo "Setting version"
-RUN echo "0.1" > /version
+RUN echo "0.2" > /version
 
 EXPOSE \
     1812/udp \
@@ -15,12 +15,10 @@ RUN yum update -y
 RUN yum install freeradius freeradius-sqlite freeradius-radclient sqlite openssl-dev -y  
 RUN yum install nano -y
 
-COPY "configuration/radiusd_3_0_4.conf" "/etc/raddb/radiusd.conf"
-COPY "configuration/clients.conf" "/etc/raddb/clients.conf"
-# COPY "configuration/authorize" "/etc/raddb/mods-config/files/authorize"
-# COPY "configuration/default" "/etc/raddb/sites-available/default"s
-# COPY "configuration/filter" "/etc/raddb/policy.d/filter"
+COPY "configuration/3013/radiusd.conf" "/etc/raddb/radiusd.conf"
+COPY "configuration/3013/clients.conf" "/etc/raddb/clients.conf"
+COPY "configuration/3013/default" "/etc/raddb/sites-available/default"
 
-COPY "output/rlm_isam.so" "/usr/lib64/freeradius/rlm_isam.so"
+COPY "output/rlm_verify.so" "/usr/lib64/freeradius/rlm_verify.so"
 
-#ENTRYPOINT radiusd -X
+ENTRYPOINT radiusd -X

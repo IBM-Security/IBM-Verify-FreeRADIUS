@@ -9,5 +9,9 @@ services:
     ports:
       - "0.0.0.0:1812:1812"
       - "0.0.0.0:1812:1812/udp"
+    entrypoint:
+     - bash
     labels:
      - "IBM Verify FreeRADIUS"
+    tty: true
+    stdin_open: true
