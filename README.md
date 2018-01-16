@@ -137,6 +137,12 @@ To install required `YUM` packages:
 yum update -y
 yum install gcc openssl-devel.x86_64 git libtalloc-devel libcurl-devel -y
 ```
+To install required `APT` packages:
+```
+apt-get update -y
+apt-get install -y git ssl-cert autotools-dev libgdbm-dev libpcap-dev libsqlite3-dev dpkg-dev debhelper quilt libcurl4-openssl-dev libiodbc2-dev libjson-c-dev libjson0-dev libkrb5-dev libldap2-dev libpam0g-dev libperl-dev libmysqlclient-dev libpq-dev 
+libreadline-dev libsasl2-dev libtalloc-dev libyubikey-dev python-dev
+```
 
 2. Download FreeRadius release source code
 You can download the FreeRadius source page from the [Official GitHub Respository](https://github.com/FreeRADIUS/freeradius-server/releases). Choose your version carefully, the module supports version 3.0.4 and upward until 3.0.15 which is the current release at the time of publishing. 
@@ -215,7 +221,8 @@ verify {
 }
 ```
 4. Make sure your client and client secret is in clients.conf [/usr/local/etc/raddb/clients.conf](configuration/clients.conf). The test scripts provided use the client secret of 'example_verify_secret'.
-5. In the authorize stanza of the available sites for the radius server (default..by default), add the module 'verify' [/usr/local/etc/raddb/sites-available/default](configuration/default) in the order you'd like it to be processed. 
+5. In the authorize stanza of the available sites for the radius server (default..by default), add the module 'verify' [/usr/local/etc/raddb/sites-available/default](configuration/default) in the order you'd like it to be processed. Make sure to remove 
+any filters (Like `filter-username` in 3.0.15 that might inhibit the usage.
 ```
 authorize {
 	# There will be a bunch of other modules here configured by default - you may remove these.

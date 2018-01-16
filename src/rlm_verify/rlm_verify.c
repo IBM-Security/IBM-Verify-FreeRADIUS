@@ -36,6 +36,9 @@ RCSID("$Id: 5acbecb64b88d31b25e0d25d81c1cf3b93a68f1b $")
 #if RADIUSD_VERSION==030013
 #define pairmake_reply(reply, message, top)({pair_make_reply(reply, message, top);})
 #endif
+#if RADIUSD_VERSION==030015
+#define pairmake_reply(reply, message, top)({pair_make_reply(reply, message, top);})
+#endif
 
 /*
  *	Define a structure for our module configuration.
@@ -346,16 +349,10 @@ static rlm_rcode_t CC_HINT(nonnull) mod_authorize(UNUSED void *instance,
 
 		  if (okay){
 
-			#if RADIUSD_VERSION==040000
-			char buffer[state->vp_length*sizeof(int)];
-			#else
-			#if RADIUSD_VERSION==030013
-			char buffer[state->vp_length*sizeof(int)];
-			#else
-			#endif
 			#if RADIUSD_VERSION==030004
 			char buffer[state->length*sizeof(int)];
-			#endif
+			#else
+			char buffer[state->vp_length*sizeof(int)];
 			#endif
 			
 			#if RADIUSD_VERSION==040000
@@ -765,29 +762,6 @@ rad_module_t rlm_verify = {
 	
 #else
 
-#if RADIUSD_VERSION==030013
-
-extern module_t rlm_verify;
-module_t rlm_verify = {
-	.magic		= RLM_MODULE_INIT,
-	.name		= "verify",
-	.type		= RLM_TYPE_THREAD_SAFE,
-	.inst_size	= sizeof(rlm_verify_t),
-	.config		= module_config,
-	.instantiate	= mod_instantiate,
-	.detach		= mod_detach,
-	.methods = {
-		[MOD_AUTHENTICATE]	= mod_authenticate,
-		[MOD_AUTHORIZE]		= mod_authorize,
-#ifdef WITH_ACCOUNTING
-		[MOD_PREACCT]		= mod_preacct,
-		[MOD_ACCOUNTING]	= mod_accounting,
-		[MOD_SESSION]		= mod_checksimul
-#endif
-	},
-};
-
-#endif
 #if RADIUSD_VERSION==030004
 module_t rlm_verify = {
 	RLM_MODULE_INIT,
@@ -812,7 +786,28 @@ module_t rlm_verify = {
 		NULL			/* post-auth */
 	},
 };
-#endif
+#else 
 
+extern module_t rlm_verify;
+module_t rlm_verify = {
+	.magic		= RLM_MODULE_INIT,
+	.name		= "verify",
+	.type		= RLM_TYPE_THREAD_SAFE,
+	.inst_size	= sizeof(rlm_verify_t),
+	.config		= module_config,
+	.instantiate	= mod_instantiate,
+	.detach		= mod_detach,
+	.methods = {
+		[MOD_AUTHENTICATE]	= mod_authenticate,
+		[MOD_AUTHORIZE]		= mod_authorize,
+#ifdef WITH_ACCOUNTING
+		[MOD_PREACCT]		= mod_preacct,
+		[MOD_ACCOUNTING]	= mod_accounting,
+		[MOD_SESSION]		= mod_checksimul
+#endif
+	},
+};
+
+#endif
 
 #endif

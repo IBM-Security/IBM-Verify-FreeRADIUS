@@ -10,7 +10,7 @@ ISAM Verify SDK requires [libcurl](https://curl.haxx.se/libcurl/c/libcurl.html) 
 
 ## Interfaces 
 
-int isam_initiate_policy_otp_simple(const char *host, const char *protocol, uint32_t port, const char *path, char const *apikey, char const *username, char const *additional);
+ISAM_CALL_AUTH_POLICY(policy);
 
 ## Policy response object methods
 
@@ -18,9 +18,3 @@ int isam_initiate_policy_otp_simple(const char *host, const char *protocol, uint
 - Code
 - Success
 - Body
-
-## Contributing
-
-## License 
-Probably MIT since so much Open Source
-
