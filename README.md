@@ -7,7 +7,7 @@ IBM Verify FreeRadius module for enhanced authentication.
 To use this repository, you must have already setup SSH keys to the IBM Github. See a guide [here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/). 
 You must also already have either Vagrant or Docker & Docker Compose installed. 
 ```
-git clone --recursive git@github.ibm.com:jaredpa/IBM-Verify-FreeRADIUS.git
+git clone --recursive git@github.com:IBM-Security/IBM-Verify-FreeRADIUS.git
 cd IBM-Verify-FreeRADIUS/
 ```
 For normal production usage: 
