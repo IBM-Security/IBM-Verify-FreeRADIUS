@@ -115,6 +115,7 @@ This flow allows a user to select HOW they would like to present their second fa
 
 ## Shell Test Client
 The easiest way to test the Verify Radius module is to use the provided test script. This test script is a shell script that utilises `radclient` to make the appropriate calls for the different modes of the module. It assists in maintaining the Radius `State` parameter and challenging appropriately for the OTP when a `Access-Challenge` packet is recieved. 
+To use this script, the [radclient](https://wiki.freeradius.org/config/Radclient) command line package must be installed. This can usually be installed from popular package managers (like [APT](https://wiki.debian.org/Apt), [YUM/DNF](http://yum.baseurl.org/) or [Brew](https://brew.sh/)). 
 ```
 ~/Verify-FreeRadius $ sh test_verify_radius.sh
 usage: test_verify_radius.sh <mode> <host> <port> <secret> <user> <otp:OPTIONAL>
